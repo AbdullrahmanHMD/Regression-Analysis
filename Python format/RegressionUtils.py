@@ -16,3 +16,41 @@ def RMSE(Y, Y_pred, N):
     rmse = math.sqrt(rmse)
 
     return rmse
+
+# select_n_features: Given a dataset and an n value
+# returns the dataset with the n most impactful
+# features.
+# dataset:  The dataset to select features from.
+# n:        The number of features to select.
+def select_n_features(dataset, n):
+
+    # If the first parameter is not an array.
+    if not (isinstance(dataset, list) or isinstance(dataset, np.ndarray)):
+        raise Exception("Invalid input type. X is of type {}".format(type(dataset)))
+
+    # If the n parameter is geater than the number of feautres of the given dataset.
+    if n > dataset.shape[1]:
+        raise Exception("Invalid n value for a dataset with {} features.".format(dataset.shape[1]))
+
+    from sklearn.feature_selection import chi2
+    from sklearn.feature_selection import SelectKBest
+
+    Y_truth = np.array(dataset[:,-1])
+    X = np.array(dataset[:,1: -1])
+
+    selected = SelectKBest(score_func=chi2, k='all')
+    fit = selected.fit(X, Y_truth.astype('int'))
+    scores = np.array(fit.scores_)
+
+    selected_scores = scores
+    
+    for i in range(len(scores) - n):
+        selected_scores = np.delete(selected_scores, np.argmin(selected_scores))
+
+    selected_scores_indices = []
+
+    for s in selected_scores:
+        selected_scores_indices.append(list(scores).index(s))
+
+
+    return np.array([np.stack((X[:,i]), axis=0) for i in selected_scores_indices]).T
