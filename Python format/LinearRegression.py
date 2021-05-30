@@ -1,4 +1,5 @@
 import numpy as np
+import RegressionUtils as ru
 
 
 class LinearRegression(Object):
@@ -32,4 +33,10 @@ class LinearRegression(Object):
 
         return True
 
-    
+
+    def train_with_linear_regression(self, X, Y):
+
+        if self.isValidData(X, Y):
+            X_train, X-test, y_train, y_test = ru.split_data(X, Y)
+
+

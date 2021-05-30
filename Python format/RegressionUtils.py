@@ -17,6 +17,11 @@ def RMSE(Y, Y_pred, N):
 
     return rmse
 
+def split_data(X, Y):
+    from sklearn.model_selection import train_test_split
+    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.25, random_state=1)
+    return X_train, X_test, Y_train, Y_test
+
 # select_n_features: Given a dataset and an n value
 # returns the dataset with the n most impactful
 # features.
