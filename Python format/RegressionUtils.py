@@ -52,5 +52,17 @@ def select_n_features(dataset, n):
     for s in selected_scores:
         selected_scores_indices.append(list(scores).index(s))
 
-
     return np.array([np.stack((X[:,i]), axis=0) for i in selected_scores_indices]).T
+
+
+# dimensinality_reduction: Given a list of data points X
+# reduces their dimensionality to a given parameter n.
+# X: The data points to perform diemsionality reduction upon.
+# n: The dimension of the data points after performing
+#    dimensionality reduction.   
+def dimensinality_reduction(X, n):
+  from sklearn.decomposition import PCA 
+  model = PCA(n_components=n) 
+  model.fit(X) 
+  X = model.transform(X)
+  return X
