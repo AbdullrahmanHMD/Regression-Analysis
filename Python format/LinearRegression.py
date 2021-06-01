@@ -2,12 +2,13 @@ import numpy as np
 import RegressionUtils as ru
 
 
-class LinearRegression(Object):
+class LinearRegression():
 
     def __init__(self, X, Y):
         self.X = X
         self.Y = Y
 
+   
     def isValidData(self, X, Y):
         # If the first parameter is not an array.
         if not (isinstance(X, list) or isinstance(X, np.ndarray)):
@@ -34,9 +35,31 @@ class LinearRegression(Object):
         return True
 
 
-    def train_with_linear_regression(self, X, Y):
+    def estimation_parameters(self):
 
+        X = self.X
+        Y = self.Y
         if self.isValidData(X, Y):
-            X_train, X-test, y_train, y_test = ru.split_data(X, Y)
+            N = X.shape[0]
+            A = np.vstack(([N, np.sum(X)], [np.sum(X), np.dot(X,X)]))
+            print(A.shape)
+            Y = np.array([np.sum(Y), np.dot(Y,X)])
+            Y = np.reshape(Y, (Y.shape[0], 1))
+            w = np.matmul(np.linalg.inv(A), Y)
+            return w
+        else:
+            raise Exception("Invalid inputs!.")
+            return -1
+
+    def predict(self, X_test, W):
+        w0 = W[0]
+        w1 = W[1]
+        y_predicted = np.array([(w0 + w1 * x) for x in X_test])
+        return y_predicted
+
+
+
+
+
 
 

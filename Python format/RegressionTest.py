@@ -13,6 +13,7 @@ path = os.path.abspath(os.getcwd()) + '\\' + folder_name + '\\' + file_name
 real_estate_data = pd.read_csv(path).to_numpy()
 
 X = np.array(real_estate_data[:,1: -1])
+N = len(X)
 Y_truth = np.array(real_estate_data[:,-1])
 
 # -----------------------------------------------------
@@ -31,28 +32,50 @@ from RegressionUtils import dimensinality_reduction
 # reduction
 n = 1
 X = dimensinality_reduction(X, n)
+X = np.reshape(X, (N, ))
 
 #
 # -----------------------------------------------------
 # Regression:
-
-from NonparametricRegression import kernel_smoother
-x_t = linspace(min(X), max(X), len(X))
-h = 500
-Y_pred = kernel_smoother(X, x_t, Y_truth.reshape(-1 , 1), h)
-
 #
+# from NonparametricRegression import kernel_smoother
+# x_t = linspace(min(X), max(X), len(X))
+# h = 500
+# Y_pred = kernel_smoother(X, x_t, Y_truth.reshape(-1 , 1), h)
+#
+# #
+# # -----------------------------------------------------
+# # Plotting:
+#
+# plt.plot(X, Y_truth, "b.", markersize = 10)
+#
+# plt.plot(x_t, Y_pred, "r-")
+#
+# plt.xlabel("x")
+# plt.ylabel("y")
+#
+# plt.show()
+#
+# #
 # -----------------------------------------------------
-# Plotting:
+
+from LinearRegression import LinearRegression
+import RegressionUtils as ru
+
+X_train, X_test, y_train, y_test = ru.split_data(X, Y_truth)
+print(np.dot(Y_truth, X))
+model = LinearRegression(X_train, y_train)
+parameters = LinearRegression.estimation_parameters(model)
+print(parameters)
+y_pred = LinearRegression.predict(model, X_test, parameters)
+print((y_pred - y_test))
 
 plt.plot(X, Y_truth, "b.", markersize = 10)
 
-plt.plot(x_t, Y_pred, "r-")
+plt.plot(X_test, y_pred, "r-")
 
 plt.xlabel("x")
 plt.ylabel("y")
 
 plt.show()
 
-#
-# -----------------------------------------------------

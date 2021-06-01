@@ -2,6 +2,7 @@ import numpy as np
 import math
 
 
+
 # RMSE: Root Mean Squared Error.
 # Y:        The true labels of a data set.
 # Y_pred:   The predicted labels of a data set.
@@ -40,8 +41,8 @@ def select_n_features(dataset, n):
     from sklearn.feature_selection import chi2
     from sklearn.feature_selection import SelectKBest
 
-    Y_truth = np.array(dataset[:,-1])
-    X = np.array(dataset[:,1: -1])
+    Y_truth = np.array(dataset[:, -1])
+    X = np.array(dataset[:, 1: -1])
 
     selected = SelectKBest(score_func=chi2, k='all')
     fit = selected.fit(X, Y_truth.astype('int'))
