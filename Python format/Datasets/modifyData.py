@@ -1,18 +1,30 @@
-
+import numpy as np
 import pandas as pd
   
 # reading the csv file
-df = pd.read_csv("insurance.csv")
+df = pd.read_csv("Life_Expectancy_Data.csv")
 aux = df.to_numpy  
 
-col = 'region'
+col = 'Alcohol'
 
-for i in range(len(df)):
-    if df.loc[i, col] == 'southwest':
-        df.loc[i, col] = 0
-    else:
-        df.loc[i, col] = 1
+aux = df[col].to_numpy()
+column = df[col].to_numpy()
 
+nan_array = np.isnan(aux)
+not_nan_array = ~ nan_array
+aux = aux[not_nan_array]
+avg = np.average(aux)
+
+column[nan_array] = avg
+
+print(aux.shape, " | ", column.shape)
+
+for i in column:
+    print(i)
+
+# for i in range(len(df)):
+#     if df.loc[i, col] == None:
+    
 # updating the column value/data
 # writing into the file
-df.to_csv("insurance.csv", index=False)
+# df.to_csv("Life_Expectancy_Data_New.csv", index=False)

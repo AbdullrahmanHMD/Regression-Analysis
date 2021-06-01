@@ -1,6 +1,7 @@
 import numpy as np
+from numpy.lib.shape_base import column_stack
+import pandas as pd
 import math
-
 
 # RMSE: Root Mean Squared Error.
 # Y:        The true labels of a data set.
@@ -62,7 +63,30 @@ def select_n_features(dataset, n):
 #    dimensionality reduction.   
 def dimensinality_reduction(X, n):
   from sklearn.decomposition import PCA 
+
   model = PCA(n_components=n) 
   model.fit(X) 
+
   X = model.transform(X)
   return X
+
+# replace_nan_values: Given a matrix X of data points,
+# returns a new X matrix with all NaN values replaced
+# with the average value of the features corresponding
+# to the feature that had the NaN value.
+# X: Univariate/Mutlivariate Data points
+def replace_nan_values(X):
+    new_X = []
+    for i in range(X.shape[1]):
+        temp_arr = X[:,i]
+        column = X[:,i]
+
+        nan_array = pd.isnull(temp_arr)
+        not_nan_array = ~ nan_array
+
+        temp_arr = pd.DataFrame(temp_arr[not_nan_array])
+        avg = pd.DataFrame.mean(temp_arr)
+        column[nan_array] = avg
+        new_X.append(column)
+
+    return np.array(new_X).T
