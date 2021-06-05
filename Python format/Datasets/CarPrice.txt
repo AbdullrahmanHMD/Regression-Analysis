@@ -1,0 +1,16 @@
+doornumber:
+	two = 0
+	four = 1
+
+drivewheel:
+	fwd = 0
+	4wd = 1
+
+fueltype:
+	gas = 0
+	diesel = 1
+
+aspiration:
+	std = 0
+	turbo = 1
+	

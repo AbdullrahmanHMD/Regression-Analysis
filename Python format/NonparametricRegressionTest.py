@@ -58,7 +58,7 @@ plt.plot(x_t, Y_pred, "r-")
 plt.xlabel("x")
 plt.ylabel("y")
 
-# plt.show()
+plt.show()
 
 #
 # -----------------------------------------------------
@@ -115,43 +115,42 @@ plt.plot(x_t, Y_pred, "r-")
 plt.xlabel("x")
 plt.ylabel("y")
 
-# plt.show()
+plt.show()
 
 #--------------------------------------------------------------------------------
 
-# Life_Expectancy Data retrieval:
-file_name = "Life_Expectancy_Data_New.csv"
+# CarPrice Data retrieval:
+file_name = "CarPrice_Assignment.csv"
 folder_name = "Datasets"
 path = os.path.abspath(os.getcwd()) + '\\' + folder_name + '\\' + file_name
-life_expectancy_data = pd.read_csv(path).to_numpy()
+car_price = pd.read_csv(path).to_numpy()
 
-X = np.array(life_expectancy_data[:,1: -1])
-Y_truth = np.array(life_expectancy_data[:,-1]).reshape(-1 , 1)
-print(Y_truth)
+X = np.array(car_price[:: -1])
+Y_truth = np.array(car_price[:,-1]).reshape(-1 , 1)
+
 # Replacing NaN values with average column values.
 from RegressionUtils import replace_nan_values
 X = replace_nan_values(X)
 
-# -----------------------------------------------------
-# Life_Expectancy Data Manipulation:
+# # -----------------------------------------------------
+# # CarPrice Data Manipulation:
 
 # Feartue selection:
 from RegressionUtils import select_n_features
 # Selecting top 3 features.
-n = 1
-life_expectancy_data = replace_nan_values(life_expectancy_data)
-X = select_n_features(life_expectancy_data, n)
+n = 3
+car_price = replace_nan_values(car_price)
+X = select_n_features(car_price, n)
 
-# Dimensionality reduction:
+# # Dimensionality reduction:
 from RegressionUtils import dimensinality_reduction
 # The number of dimensions after performing dimensionality
 # reduction
 n = 1
 X = dimensinality_reduction(X, n)
 
-# Constructing train and test sets:
+# # Constructing train and test sets:
 from sklearn.model_selection import train_test_split
-
 test_size = 0.2
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y_truth, test_size = test_size, random_state=1)
 
@@ -161,15 +160,16 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, Y_truth, test_size = test
 
 from NonparametricRegression import kernel_smoother
 x_t = linspace(min(X_train), max(X_train), len(X_train))
-h = 50
+
+h = 30
 Y_pred = kernel_smoother(X_train, x_t, Y_train, h)
 
 #
 # -----------------------------------------------------
-# Plotting Real_estate:
+# Plotting CarPrice:
 
-plt.plot(X_train, Y_train, "b.", markersize = 7)
-plt.plot(X_test, Y_test, "g.", markersize = 5)
+plt.plot(X_train, Y_train, "g.", markersize = 5)
+plt.plot(X_test, Y_test, "b.", markersize = 5)
 
 plt.plot(x_t, Y_pred, "r-")
 
