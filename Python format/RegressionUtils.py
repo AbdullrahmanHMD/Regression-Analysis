@@ -5,12 +5,13 @@ import math
 # RMSE: Root Mean Squared Error.
 # Y:        The true labels of a data set.
 # Y_pred:   The predicted labels of a data set.
-# N:        The number of points in the data set
-#           whose labels are Y.
-def RMSE(Y, Y_pred, N):
+
+def RMSE(Y, Y_pred):
     delta_Y = np.subtract(Y, Y_pred)
     delta_Y = np.square(delta_Y)
     delta_Y = np.sum(delta_Y)
+
+    N = len(Y)
 
     rmse = np.divide(delta_Y, N)
     rmse = math.sqrt(rmse)
@@ -19,6 +20,7 @@ def RMSE(Y, Y_pred, N):
 
 # select_n_features: Given a dataset and an n value
 # returns the dataset with the n most impactful
+# along with their indecies.
 # features.
 # dataset:  The dataset to select features from.
 # n:        The number of features to select.
@@ -52,7 +54,7 @@ def select_n_features(dataset, n):
     for s in selected_scores:
         selected_scores_indices.append(list(scores).index(s))
 
-    return np.array([np.stack((X[:,i]), axis=0) for i in selected_scores_indices]).T
+    return np.array([np.stack((X[:,i]), axis=0) for i in selected_scores_indices]).T, selected_scores_indices
 
 
 # dimensinality_reduction: Given a list of data points X
@@ -89,3 +91,10 @@ def replace_nan_values(X):
         new_X.append(column)
 
     return np.array(new_X).T
+
+def mean_squared_errors(Y, Y_pred):
+    N = len(Y)
+    delta_Y = np.subtract(Y, Y_pred)
+    delta_Y = np.square(delta_Y)
+    delta_Y = np.sum(delta_Y)
+    return np.divide(delta_Y, N)
