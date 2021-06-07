@@ -7,7 +7,6 @@ import RegressionUtils as ru
 
 def PolynomialRegression(X, Y, K):
 
-
     if not (isinstance(X, list) or isinstance(X, np.ndarray)):
             raise Exception("Invalid input type. X is of type {}".format(type(X)))
        
