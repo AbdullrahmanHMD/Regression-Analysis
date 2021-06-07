@@ -28,7 +28,7 @@ X = replace_nan_values(X)
 # Feartue selection:
 from RegressionUtils import select_n_features
 # Selecting top 3 features.
-n = 5
+n = 4
 X, feature_indecies = select_n_features(real_estate_data, n)
 
 # Retrieving the remaining features.
@@ -73,7 +73,12 @@ x_t_test = linspace(min(X_test), max(X_test), len(X_test))
 Y_pred_test = kernel_smoother(X_test, x_t_test, Y_test, h)
 mse = mean_squared_errors(Y_test, Y_pred_test)
 
-print("The squared errors for the kernel smoother with the Real_estate dataset is {}".format(mse))
+print("The squared errors for the kernel smoother with the Real_estate dataset is {}\n".format(mse))
+
+# Printing selected features:
+print('Selected features for Real Estate data set:')
+[print("{}) {}".format(i + 1, feature)) for i, feature in zip(range(len(features)),features)]
+print("")
 
 #
 # -----------------------------------------------------
@@ -139,6 +144,11 @@ x_t = linspace(min(X_train), max(X_train), len(X_train))
 h = 1
 Y_pred = kernel_smoother(X_train, x_t, Y_train, h)
 
+# Printing selected features:
+print('Selected features for Insurance data set::')
+[print("{}) {}".format(i + 1, feature)) for i, feature in zip(range(len(features)),features)]
+print("")
+
 #
 # -----------------------------------------------------
 # Plotting insurance:
@@ -203,6 +213,11 @@ x_t = linspace(min(X_train), max(X_train), len(X_train))
 
 h = 30
 Y_pred = kernel_smoother(X_train, x_t, Y_train, h)
+
+# Printing selected features:
+print('Selected features in Car Price data set:')
+[print("{}) {}".format(i + 1, feature)) for i, feature in zip(range(len(features)),features)]
+print("")
 
 #
 # -----------------------------------------------------
