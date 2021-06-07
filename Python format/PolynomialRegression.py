@@ -1,8 +1,11 @@
 import numpy as np
+from numpy.linalg.linalg import transpose
 import RegressionUtils as ru
 
 
-def LinearRegression(X, Y):
+
+
+def PolynomialRegression(X, Y, K):
 
 
     if not (isinstance(X, list) or isinstance(X, np.ndarray)):
@@ -22,29 +25,35 @@ def LinearRegression(X, Y):
             raise Exception(
                     "Unmatched input lengths for X and Y. Length of X = {}, length of Y = {}".format(len(X), len(Y)))
 
+    N = len(X)
 
-   # paramters estimation: w0, w1
-    N = X.shape[0]
-    A = np.vstack(([N, np.sum(X)], [np.sum(X), np.dot(X,X)]))
-    Y = np.array([np.sum(Y), np.dot(Y,X)])
-    Y = np.reshape(Y, (Y.shape[0], 1))
-    W = np.matmul(np.linalg.inv(A), Y)
-    W = np.reshape(W,(len(W), ))
-      
-    # return parameters
-    w0 = W[0]
-    w1 = W[1]
-    return  w0, w1    
+    #feature matrix D
+    D = []
+    for x in X:
+        row = []
+        for i in range(K + 1):
+            row.append(x ** i)
+        D.append(row)
+    D = np.array(D)
 
-
-# for predixtion
-def predict(X, w0, w1):
-    return  np.array([(w0 + w1 * x) for x in X])
+   #parameter estimation
+    W = np.linalg.inv(np.matmul(D.transpose(), D))
+    W = np.matmul(W, D.transpose())
+    W = np.matmul(W, np.reshape(Y, (len(Y), 1)))
+    return np.reshape(W, ((K + 1), ))
 
 
 
+def predict(X, W, K):
+    y_pred = []
+    for x in X:
+        sum = W[0]
+        for i in range(K):
+            sum += np.multiply(W[i+1], np.power(x, (i+1)))
+        y_pred.append(sum)
+    return np.array(y_pred)
+            
 
-
-
+            
 
 
