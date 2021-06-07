@@ -2,7 +2,7 @@ import numpy as np
 import RegressionUtils as ru
 
 
-class LinearRegression():
+def LinearRegression():
 
     def __init__(self, X, Y):
         self.X = X
