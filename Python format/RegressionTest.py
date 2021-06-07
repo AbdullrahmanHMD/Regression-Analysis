@@ -34,17 +34,6 @@ n = 1
 X = dimensinality_reduction(X, n)
 X = np.reshape(X, (N, ))
 
-#
-# -----------------------------------------------------
-# Regression:
-#
-# from NonparametricRegression import kernel_smoother
-# x_t = linspace(min(X), max(X), len(X))
-# h = 500
-# Y_pred = kernel_smoother(X, x_t, Y_truth.reshape(-1 , 1), h)
-#
-# #
-# # -----------------------------------------------------
 # # Plotting:
 #
 # plt.plot(X, Y_truth, "b.", markersize = 10)
