@@ -2,41 +2,33 @@ import numpy as np
 import pandas as pd
   
 # reading the csv file
-df = pd.read_csv("CarPrice_Assignment.csv")
-aux = df.to_numpy  
+file_name = "CarPrice_Assignment.csv"
+df = pd.read_csv(file_name)
 
-col = 'doornumber'
+cn = 'price'
+col = df[cn]
+col = col.to_numpy()
 
-for i in range(len(df)):
-    if df.loc[i, col] == 'two':
-        df.loc[i, col] = 0
-    else:
-        df.loc[i, col] = 1
+print("Car Price: ", np.average(col))
 
-col = 'drivewheel'
+file_name = 'Real_estate.csv'
+df = pd.read_csv(file_name)
 
+cn = 'house price of unit area'
+col = df[cn]
 
-for i in range(len(df)):
-    if df.loc[i, col] == 'fwd':
-        df.loc[i, col] = 0
-    else:
-        df.loc[i, col] = 1
+col = col.to_numpy()
 
-col = 'fueltype'
+print("Real Estate: ",np.average(col))
 
+file_name = 'insurance.csv'
+df = pd.read_csv(file_name)
 
-for i in range(len(df)):
-    if df.loc[i, col] == 'gas':
-        df.loc[i, col] = 0
-    else:
-        df.loc[i, col] = 1
+cn = 'charges'
+col = df[cn]
 
-col = 'aspiration'
+col = col.to_numpy()
 
-for i in range(len(df)):
-    if df.loc[i, col] == 'std':
-        df.loc[i, col] = 0
-    else:
-        df.loc[i, col] = 1
+print("Insurance: ", np.average(col))
 
-df.to_csv("CarPrice_Assignment_new.csv", index=False)
+# df.to_csv("CarPrice_Assignment_new.csv", index=False)

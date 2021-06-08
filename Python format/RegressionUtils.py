@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import math
 
-# RMSE: Root Mean Squared Error.
+# RMSE: Root Mean Squared Error.*
 # Y:        The true labels of a data set.
 # Y_pred:   The predicted labels of a data set.
 
