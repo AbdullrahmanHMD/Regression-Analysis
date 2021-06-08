@@ -42,27 +42,30 @@ n = 1
 X = dimensinality_reduction(X, n)
 X = np.reshape(X, (N, ))
 
-
-
-from LinearRegression import LinearRegression
 from RegressionUtils import split_data
-
 X_train, X_test, y_train, y_test = split_data(X, Y)
-w0, w1 = LinearRegression(X_train, y_train)
 
-from LinearRegression import predict
-y_train_pred = predict(X_train, w0, w1)
-y_pred = predict(X_test, w0, w1)
+
+K = 10
+from PolynomialRegression import PolynomialRegression
+W = PolynomialRegression(X_train, y_train, K)
+
+from PolynomialRegression import predict
+y_pred = predict(X_test, W, K)
 
 ## RMSE and MSE 
 from RegressionUtils import RMSE
+
 RMSE = RMSE(y_test, y_pred)
 print("The Root Mean Squared Error: ", RMSE)
 
 
+
+X_t = linspace(min(X_train), max(X_train), len(X_train))
+
 #Plotting
 plt.plot(X, Y, "b.", markersize = 10)
-plt.plot(X_train, y_train_pred, "r-")
+plt.plot(X_t, predict(X_t, W, K), "r-")
 plt.xlabel("X")
 plt.ylabel("Y")
 plt.show()
@@ -72,7 +75,6 @@ plt.show()
 #_________________________________________________________________________________________________________________________________________________________
 # 
 # For Second Dataset
-
 
 # Data retrieval from CSV using Pandas:
 file_name = "insurance.csv"
@@ -110,27 +112,27 @@ n = 1
 X = dimensinality_reduction(X, n)
 X = np.reshape(X, (N, ))
 
-
-
-from LinearRegression import LinearRegression
 from RegressionUtils import split_data
-
 X_train, X_test, y_train, y_test = split_data(X, Y)
-w0, w1 = LinearRegression(X_train, y_train)
 
-from LinearRegression import predict
-y_train_pred = predict(X_train, w0, w1)
-y_pred = predict(X_test, w0, w1)
+
+K = 10
+from PolynomialRegression import PolynomialRegression
+W = PolynomialRegression(X_train, y_train, K)
+
+from PolynomialRegression import predict
+y_pred = predict(X_test, W, K)
 
 ## RMSE and MSE 
 from RegressionUtils import RMSE
 RMSE = RMSE(y_test, y_pred)
 print("The Root Mean Squared Error: ", RMSE)
 
+X_t = linspace(min(X_train), max(X_train), len(X_train))
 
 #Plotting
 plt.plot(X, Y, "b.", markersize = 10)
-plt.plot(X_train, y_train_pred, "r-")
+plt.plot(X_t, predict(X_t, W, K), "r-")
 plt.xlabel("X")
 plt.ylabel("Y")
 plt.show()
@@ -139,8 +141,6 @@ plt.show()
 #_________________________________________________________________________________________________________________________________________________________
 # 
 # For Third Dataset
-
-
 
 # Data retrieval from CSV using Pandas:
 file_name = "CarPrice_Assignment.csv"
@@ -178,27 +178,27 @@ n = 1
 X = dimensinality_reduction(X, n)
 X = np.reshape(X, (N, ))
 
-
-
-from LinearRegression import LinearRegression
 from RegressionUtils import split_data
-
 X_train, X_test, y_train, y_test = split_data(X, Y)
-w0, w1 = LinearRegression(X_train, y_train)
 
-from LinearRegression import predict
-y_train_pred = predict(X_train, w0, w1)
-y_pred = predict(X_test, w0, w1)
+
+K = 10
+from PolynomialRegression import PolynomialRegression
+W = PolynomialRegression(X_train, y_train, K)
+
+from PolynomialRegression import predict
+y_pred = predict(X_test, W, K)
 
 ## RMSE and MSE 
 from RegressionUtils import RMSE
 RMSE = RMSE(y_test, y_pred)
 print("The Root Mean Squared Error: ", RMSE)
 
+X_t = linspace(min(X_train), max(X_train), len(X_train))
 
 #Plotting
 plt.plot(X, Y, "b.", markersize = 10)
-plt.plot(X_train, y_train_pred, "r-")
+plt.plot(X_t, predict(X_t, W, K), "r-")
 plt.xlabel("X")
 plt.ylabel("Y")
 plt.show()
