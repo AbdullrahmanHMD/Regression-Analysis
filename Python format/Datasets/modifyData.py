@@ -31,4 +31,5 @@ col = col.to_numpy()
 
 print("Insurance: ", np.average(col))
 
+
 # df.to_csv("CarPrice_Assignment_new.csv", index=False)

@@ -53,37 +53,3 @@ def kernel_smoother(X, X_t, Y, h):
         Y_pred.append(y_hat)
 
     return np.array(Y_pred)
-
-# def kernel_smoother_alt(X, Y, h):
-#     sum_1 = []
-#     sum_2 = []
-
-#     term1 = []
-#     term2 = []
-
-#     maximum = max(X)
-#     x_test = np.linspace(0, maximum, num = len(X))
-
-#     for x in x_test:
-#         for x_i, y_i in zip(X, Y):
-#             u = kernel_function(np.divide((x - x_i), h))
-#             k = np.multiply(u, y_i)
-
-#             if (u == 0):
-#                 u = 1e-6
-
-#             sum_1.append(k)
-#             sum_2.append(u)
-
-#         term1.append(np.sum(sum_1))
-#         term2.append(np.sum(sum_2))
-
-#         sum_1 = []
-#         sum_2 = []
-
-#     term1 = np.array(term1)
-#     term2 = np.array(term2)
-
-#     Y_pred = np.divide(term1, term2)
-
-#     return Y_pred

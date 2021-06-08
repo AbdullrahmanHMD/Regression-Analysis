@@ -2,10 +2,9 @@ import numpy as np
 import pandas as pd
 import math
 
-# RMSE: Root Mean Squared Error.*
+# RMSE: Root Mean Squared Error.
 # Y:        The true labels of a data set.
 # Y_pred:   The predicted labels of a data set.
-
 def RMSE(Y, Y_pred):
     delta_Y = np.subtract(Y, Y_pred)
     delta_Y = np.square(delta_Y)

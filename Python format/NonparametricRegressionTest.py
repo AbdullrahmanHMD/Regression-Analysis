@@ -81,7 +81,7 @@ Y_pred = kernel_smoother(X_train, x_t, Y_train, h)
 Y_pred_test = kernel_smoother(X_test, x_t_test, Y_test, h)
 rmse = RMSE(Y_test, Y_pred_test)
 
-print("The RMSE for the kernel smoother with the Real_estate dataset is {}".format(rmse))
+print("The RMSE for the kernel smoother with the Real_estate dataset is {} with h = {}".format(rmse, h))
 
 # Calculating Squared Errors:
 from RegressionUtils import mean_squared_errors
@@ -90,7 +90,7 @@ x_t_test = linspace(min(X_test), max(X_test), len(X_test))
 Y_pred_test = kernel_smoother(X_test, x_t_test, Y_test, h)
 mse = mean_squared_errors(Y_test, Y_pred_test)
 
-print("The squared errors for the kernel smoother with the Real_estate dataset is {} with h = {}\n".format(rmse, h))
+print("The squared errors for the kernel smoother with the Real_estate dataset is {} \n".format(mse))
 
 # Printing selected features:
 print('Selected features for Real Estate data set:')
@@ -112,7 +112,7 @@ plt.ylabel("y")
 
 plt.show()
 
-# Plotting error function
+# Plotting h optimization.
 x = linspace(0, len(rmse_values), len(rmse_values))
 
 plt.plot(x, rmse_values, "r-")
@@ -134,7 +134,7 @@ insurance_data = pd.read_csv(path).to_numpy()
 X = np.array(insurance_data[:-1])
 Y_truth = np.array(insurance_data[:,-1]).reshape(-1 , 1)
 
-# X = replace_nan_values(X)
+X = replace_nan_values(X)
 
 features = pd.read_csv(path).columns.to_numpy()
 
@@ -143,7 +143,7 @@ features = pd.read_csv(path).columns.to_numpy()
 
 # Feartue selection:
 from RegressionUtils import select_n_features
-# Selecting top 3 features.
+# Selecting top 5 features.
 n = 5
 X, feature_indecies = select_n_features(insurance_data, n)
 
@@ -199,7 +199,7 @@ Y_pred = kernel_smoother(X_train, x_t, Y_train, h)
 Y_pred_test = kernel_smoother(X_test, x_t_test, Y_test, h)
 rmse = RMSE(Y_test, Y_pred_test)
 
-print("The RMSE for the kernel smoother with the Real_estate dataset is {} with h = {}".format(rmse, h))
+print("The RMSE for the kernel smoother with the Insurance dataset is {} with h = {}".format(rmse, h))
 
 # Calculating Squared Errors:
 from RegressionUtils import mean_squared_errors
@@ -208,7 +208,7 @@ x_t_test = linspace(min(X_test), max(X_test), len(X_test))
 Y_pred_test = kernel_smoother(X_test, x_t_test, Y_test, h)
 mse = mean_squared_errors(Y_test, Y_pred_test)
 
-print("The squared errors for the kernel smoother with the Real_estate dataset is {}\n".format(mse))
+print("The squared errors for the kernel smoother with the Insurance dataset is {}\n".format(mse))
 
 # Printing selected features:
 print('Selected features for Insurance data set:')
@@ -230,7 +230,7 @@ plt.ylabel("y")
 
 plt.show()
 
-# # Plotting error function
+# Plotting h optimization.
 x = linspace(0, len(rmse_values), len(rmse_values))
 
 plt.plot(x, rmse_values, "r-")
@@ -254,7 +254,7 @@ Y_truth = np.array(car_price[:,-1]).reshape(-1 , 1)
 
 features = pd.read_csv(path).columns.to_numpy()
 
-# X = replace_nan_values(X)
+X = replace_nan_values(X)
 
 # -----------------------------------------------------
 # CarPrice Data Manipulation:
@@ -355,8 +355,7 @@ plt.ylabel("y")
 
 plt.show()
 
-
-# Plotting error function
+# Plotting h optimization.
 x = linspace(0, len(rmse_values), len(rmse_values))
 
 plt.plot(x, rmse_values, "r-")
