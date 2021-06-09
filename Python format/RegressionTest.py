@@ -56,9 +56,21 @@ y_pred = predict(X_test, w0, w1)
 
 ## RMSE and MSE 
 from RegressionUtils import RMSE
-RMSE = RMSE(y_test, y_pred)
-print("The Root Mean Squared Error: ", RMSE)
+from RegressionUtils import mean_squared_errors
 
+RMSE = RMSE(y_test, y_pred)
+MSE = mean_squared_errors(y_test, y_pred)
+
+print("The RMSE for Linear Regression with the " + file_name + " Dataset is ", RMSE)
+print("The MSE for Linear Regression with the " + file_name + " Dataset is ", MSE, "\n")
+print("Selected features for " + file_name + " Dataset:")
+
+index = 1
+for feature in features:
+    print(str(index) + ") " + feature)
+    index += 1
+
+print()
 
 #Plotting
 plt.plot(X, Y, "b.", markersize = 10)
@@ -124,8 +136,24 @@ y_pred = predict(X_test, w0, w1)
 
 ## RMSE and MSE 
 from RegressionUtils import RMSE
+from RegressionUtils import mean_squared_errors
+
+## RMSE and MSE
 RMSE = RMSE(y_test, y_pred)
-print("The Root Mean Squared Error: ", RMSE)
+MSE = mean_squared_errors(y_test, y_pred)
+
+
+print("The RMSE for Linear Regression with the " + file_name + " Dataset is ", RMSE)
+print("The MSE for Linear Regression with the " + file_name + " Dataset is ", MSE, "\n")
+print("Selected features for " + file_name + " Dataset:")
+
+index = 1
+for feature in features:
+    print(str(index) + ") " + feature)
+    index += 1
+
+print()
+
 
 
 #Plotting
@@ -192,9 +220,21 @@ y_pred = predict(X_test, w0, w1)
 
 ## RMSE and MSE 
 from RegressionUtils import RMSE
-RMSE = RMSE(y_test, y_pred)
-print("The Root Mean Squared Error: ", RMSE)
+from RegressionUtils import mean_squared_errors
 
+RMSE = RMSE(y_test, y_pred)
+MSE = mean_squared_errors(y_test, y_pred)
+
+print("The RMSE for Linear Regression with the " + file_name + " Dataset is ", RMSE)
+print("The MSE for Linear Regression with the " + file_name + " Dataset is ", MSE, "\n")
+print("Selected features for " + file_name + " Dataset:")
+
+index = 1
+for feature in features:
+    print(str(index) + ") " + feature)
+    index += 1
+
+print()
 
 #Plotting
 plt.plot(X, Y, "b.", markersize = 10)
