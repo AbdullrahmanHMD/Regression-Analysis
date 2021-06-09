@@ -61,7 +61,7 @@ from RegressionUtils import mean_squared_errors
 RMSE = RMSE(y_test, y_pred)
 MSE = mean_squared_errors(y_test, y_pred)
 
-print("The RMSE for Linear Regression with the " + file_name + " Dataset is ", RMSE)
+print("\nThe RMSE for Linear Regression with the " + file_name + " Dataset is ", RMSE)
 print("The MSE for Linear Regression with the " + file_name + " Dataset is ", MSE, "\n")
 print("Selected features for " + file_name + " Dataset:")
 

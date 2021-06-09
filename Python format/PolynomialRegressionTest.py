@@ -77,7 +77,7 @@ y_pred = predict(X_test, W, best_K)
 ## RMSE and MSE
 RMSE = RMSE(y_test, y_pred)
 MSE = mean_squared_errors(y_test, y_pred)
-print("The RMSE for Polynomial Regression with the " + file_name + " Dataset is ", RMSE, " with K = ", best_K)
+print("\nThe RMSE for Polynomial Regression with the " + file_name + " Dataset is ", RMSE, " with K = ", best_K)
 print("The MSE for Polynomial Regression with the " + file_name + " Dataset is ", MSE, " with K = ", best_K, "\n")
 print("Selected features for " + file_name + " Dataset:\n")
 
